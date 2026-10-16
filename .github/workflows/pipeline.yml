@@ -14,10 +14,6 @@ jobs:
     name: Validate Tourism Prediction App
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: tourism_project/deployment
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
