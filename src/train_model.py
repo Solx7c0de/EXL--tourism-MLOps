@@ -23,8 +23,8 @@ from sklearn.metrics import (
     confusion_matrix
 )
 
-TRAIN_PATH = "data/processed/train.csv"
-TEST_PATH = "data/processed/test.csv"
+TRAIN_PATH = "Data/processed/train.csv"
+TEST_PATH = "Data/processed/test.csv"
 MODEL_DIR = "models"
 
 TARGET = "ProdTaken"
