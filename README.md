@@ -2,16 +2,18 @@ Tourism Package Purchase Prediction 🚀
 
 An end-to-end Machine Learning and MLOps project that predicts whether a customer is likely to purchase a tourism package, helping businesses improve customer targeting and marketing decisions.
 
-🌐 Live Demo
+🌐 Project Links
 
-Try the Streamlit App | GitHub Repository | Hugging Face Dataset
+* Live Streamlit App: https://exl-tourism-mlops.onrender.com
+* GitHub Repository: https://github.com/Solx7c0de/EXL–tourism-MLOps
+* Hugging Face Dataset: https://huggingface.co/datasets/vzz7/tourism-dataset
 
 ⚙️ Project Workflow
 
 Dataset → Data Preparation → Model Training → MLflow Tracking → GitHub Actions → Streamlit Deployment
 
-* Data: Tourism customer data; target variable: ProdTaken.
-* Models: Logistic Regression, Random Forest, Gradient Boosting.
+* Data: Tourism customer dataset; target variable: ProdTaken.
+* Models: Logistic Regression, Random Forest, and Gradient Boosting.
 * MLOps: Hugging Face dataset registration, MLflow experiment tracking, and automated GitHub Actions workflow.
 * Deployment: Streamlit application hosted on Render for interactive customer predictions.
 
@@ -27,15 +29,13 @@ Selected Model: Gradient Boosting, based on the highest F1-score.
 📁 Repository Structure
 
 ├── data/                  # Tourism dataset
-├── src/                   # Registration, preparation & training scripts
+├── src/                   # Data registration, preparation & training
 ├── models/                # Trained model & evaluation metrics
-├── deployment/             # Streamlit app & Docker configuration
-└── .github/workflows/      # GitHub Actions MLOps pipeline
+├── deployment/            # Streamlit app & Docker configuration
+└── .github/workflows/     # GitHub Actions MLOps pipeline
 
 🛠️ Tech Stack
 
 Python · Pandas · Scikit-learn · MLflow · Hugging Face · Streamlit · Docker · GitHub Actions · Render
-
-⸻
 
 Outcome: An automated model-training workflow and a live web application for tourism customer purchase prediction.
