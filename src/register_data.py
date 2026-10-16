@@ -1,7 +1,7 @@
 import os
 from huggingface_hub import HfApi, create_repo
 
-DATA_PATH = "data/tourism.csv"
+DATA_PATH = "Data/tourism.csv"
 REPO_ID = os.environ["HF_DATASET_REPO"]
 HF_TOKEN = os.environ["HF_TOKEN"]
 
