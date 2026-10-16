@@ -1,4 +1,4 @@
-name: Tourism Project Pipeline
+name: Tourism Project MLOps Pipeline
 
 on:
   push:
@@ -9,31 +9,60 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
-  validate-app:
-    name: Validate Tourism Prediction App
+  tourism-mlops:
+    name: Tourism MLOps Pipeline
     runs-on: ubuntu-latest
+
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_DATASET_REPO: ${{ vars.HF_DATASET_REPO }}
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set Up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements.txt
 
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Check Python Syntax
+      - name: Register Dataset on Hugging Face
+        if: github.event_name != 'pull_request'
+        run: python src/register_data.py
+
+      - name: Prepare Data
+        run: python src/data_prep.py
+
+      - name: Train Models and Track Experiments
+        run: python src/train_model.py
+
+      - name: Validate Saved Model
+        run: |
+          python -c "import joblib; model = joblib.load('models/best_model.pkl'); print('Model loaded:', type(model).__name__)"
+
+      - name: Validate Streamlit App Syntax
         run: python -m py_compile app.py
 
-      - name: Verify Saved Model
-        run: |
-          python -c "import joblib; model = joblib.load('models/best_model.pkl'); print('Model loaded successfully:', type(model).__name__)"
-
-      - name: Validate Streamlit Installation
-        run: streamlit --version
+      - name: Upload Pipeline Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tourism-mlops-results
+          path: |
+            model_comparison.csv
+            models/best_model.pkl
+            models/best_metrics.json
+            mlruns/
+          if-no-files-found: warn
+          retention-days: 30
