@@ -35,7 +35,7 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r Deployment/requirements.txt
 
       - name: Register Dataset on Hugging Face
         if: github.event_name != 'pull_request'
@@ -52,7 +52,7 @@ jobs:
           python -c "import joblib; model = joblib.load('models/best_model.pkl'); print('Model loaded:', type(model).__name__)"
 
       - name: Validate Streamlit App Syntax
-        run: python -m py_compile app.py
+        run: python -m py_compile Deployment/app.py
 
       - name: Upload Pipeline Results
         if: always()
