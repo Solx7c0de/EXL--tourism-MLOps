@@ -1,0 +1,43 @@
+name: Tourism Project Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  validate-app:
+    name: Validate Tourism Prediction App
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: tourism_project/deployment
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set Up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Check Python Syntax
+        run: python -m py_compile app.py
+
+      - name: Verify Saved Model
+        run: |
+          python -c "import joblib; model = joblib.load('models/best_model.pkl'); print('Model loaded successfully:', type(model).__name__)"
+
+      - name: Validate Streamlit Installation
+        run: streamlit --version
