@@ -1,6 +1,8 @@
-streamlit
 pandas
 numpy
 scikit-learn==1.6.1
 joblib
 openpyxl
+streamlit
+huggingface_hub
+mlflow
