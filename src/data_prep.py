@@ -3,8 +3,8 @@ import pandas as pd
 
 from sklearn.model_selection import train_test_split
 
-DATA_PATH = "data/tourism.csv"
-OUTPUT_DIR = "data/processed"
+DATA_PATH = "Data/tourism.csv"
+OUTPUT_DIR = "Data/processed"
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
