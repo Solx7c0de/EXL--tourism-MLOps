@@ -128,7 +128,7 @@ for name, classifier in models.items():
 
         mlflow.sklearn.log_model(
             pipeline,
-            artifact_path="model"
+            artifact_path="model",
             serialization_format = "cloudpickle"
         )
 
