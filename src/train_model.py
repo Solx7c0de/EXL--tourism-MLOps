@@ -84,7 +84,7 @@ models = {
     )
 }
 
-mlflow.set_tracking_uri("file:./mlruns")
+mlflow.set_tracking_uri("sqlite:///mlflow.db")
 mlflow.set_experiment("Tourism_Purchase_Prediction")
 
 results = []
